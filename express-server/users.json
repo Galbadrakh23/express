@@ -1,0 +1,20 @@
+{
+  "employees": [
+    {
+      "eid": "1",
+      "firstname": "Buzz",
+      "lastname": "Light-Year",
+      "email": "buzz_lightyear@gmail.com",
+      "position": "Galaxy Guardian",
+      "profileImg": "https://files.oaiusercontent.com/file-tA3bxl0JNXEhzHK2at9BEi6k?se=2024-08-21T04%3A29%3A06Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D1e164776-7d88-480d-b20d-45eeaff1d3f7.webp&sig=ziUP7r1MUZz8Ysq3xtf/IPbdBYyQ1DuBuY6h5A5t12A%3D"
+    },
+    {
+      "eid": "2",
+      "firstname": "Woody",
+      "lastname": "Light-Year",
+      "email": "woodyPride@gmail.com",
+      "position": "Sheriff",
+      "profileImg": "https://files.oaiusercontent.com/file-tA3bxl0JNXEhzHK2at9BEi6k?se=2024-08-21T04%3A29%3A06Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D1e164776-7d88-480d-b20d-45eeaff1d3f7.webp&sig=ziUP7r1MUZz8Ysq3xtf/IPbdBYyQ1DuBuY6h5A5t12A%3D"
+    }
+  ]
+}
