@@ -7,7 +7,7 @@ const UserList = () => {
   const getEmployeesData = async () => {
     const res = await fetch("http://localhost:8000/users");
     const { users } = await res.json();
-    setUsers([...users]);
+    setUsers(users);
   };
 
   const createEmployee = async () => {
@@ -25,6 +25,15 @@ const UserList = () => {
     });
     const { user } = await res.json();
     console.log("Ae", user);
+    setUsers([...users, user]);
+  };
+
+  const deleteEmployee = async (id) => {
+    const res = await fetch(`http://localhost:8000/users/${id}`, {
+      method: "DELETE",
+    });
+    const { user } = await res.json();
+    setUsers(user.filter((user) => user.eid !== id));
   };
 
   useEffect(() => {
@@ -32,17 +41,19 @@ const UserList = () => {
   }, []);
 
   return (
-    <div class="overflow-x-auto">
-      <table class="table">
+    <div className="overflow-x-auto">
+      <table className="table">
         <UserHead />
-        <UserRow users={users} />
+        <tbody>
+          {users?.map((user) => (
+            <UserRow user={user} deleteEmployee={deleteEmployee} />
+          ))}
+        </tbody>
       </table>
       <div>
         <button
-          onClick={() => {
-            createEmployee;
-          }}
-          className=" btn btn-info btn-square btn-outline"
+          onClick={createEmployee}
+          className="btn btn-info btn-square btn-outline"
         >
           Add
         </button>

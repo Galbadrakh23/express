@@ -20,14 +20,10 @@ app.post("/users", (req, res) => {
   const { employees } = JSON.parse(data);
   const newUser = {
     eid: `${employees.length + 1}`,
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    position: req.body.position,
+    ...req.body, /// spead operator
   };
   employees.push(newUser);
   fs.writeFileSync("./users.json", JSON.stringify({ employees }));
-
   res.status(201).json({ user: newUser });
 });
 
@@ -70,7 +66,7 @@ app.delete("/users/:id", (req, res) => {
   }
   const deletedUser = employees.splice(findIndex, 1)[0];
   fs.writeFileSync("./users.json", JSON.stringify({ employees }));
-  res.status(200).json({ employees: deletedUser });
+  res.status(200).json({ user: deletedUser });
 });
 
 app.listen(8000, () => {
