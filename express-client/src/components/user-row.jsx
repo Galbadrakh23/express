@@ -1,4 +1,8 @@
+import { useState } from "react";
+import UserModal from "./user-modal";
+
 const UserRow = ({ user, deleteEmployee }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <tr key={user.eid}>
       <th>
@@ -27,8 +31,8 @@ const UserRow = ({ user, deleteEmployee }) => {
       <th>
         <button className="btn btn-outline btn-info btn-xs mx-2">Edit</button>
         <button
-          onClick={deleteEmployee}
-          className="btn btn-online btn-error btn-xs mx-2"
+          onClick={() => deleteEmployee(user.eid)}
+          className="btn btn-outline btn-error btn-xs mx-2"
         >
           Delete
         </button>

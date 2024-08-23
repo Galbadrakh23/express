@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from "react";
 import UserRow from "./user-row";
 import UserHead from "./user-head";
+import UserModal from "./user-modal";
 
 const UserList = () => {
   const [users, setUsers] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+
   const getEmployeesData = async () => {
     const res = await fetch("http://localhost:8000/users");
     const { users } = await res.json();
     setUsers(users);
   };
 
-  const createEmployee = async () => {
+  const createEmployee = async ({ newUser }) => {
     const res = await fetch("http://localhost:8000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        firstname: "Woody",
-        lastname: "Light-Year",
-        email: "woodyPride@gmail.com",
-        position: "Sheriff",
-      }),
+      body: JSON.stringify(...newUser),
     });
     const { user } = await res.json();
-    console.log("Ae", user);
     setUsers([...users, user]);
   };
 
@@ -32,9 +29,13 @@ const UserList = () => {
     const res = await fetch(`http://localhost:8000/users/${id}`, {
       method: "DELETE",
     });
-    const { user } = await res.json();
-    setUsers(user.filter((user) => user.eid !== id));
+
+    const { employees } = await res.json();
+    console.log("De", employees);
+    // setUsers(deletedUser.filter((user) => user.eid !== id));
   };
+  const show = () => setIsOpen(true);
+  const hide = () => setIsOpen(false);
 
   useEffect(() => {
     getEmployeesData();
@@ -44,20 +45,13 @@ const UserList = () => {
     <div className="overflow-x-auto">
       <table className="table">
         <UserHead />
+        <UserModal isOpen={isOpen} close={hide} />
         <tbody>
           {users?.map((user) => (
             <UserRow user={user} deleteEmployee={deleteEmployee} />
           ))}
         </tbody>
       </table>
-      <div>
-        <button
-          onClick={createEmployee}
-          className="btn btn-info btn-square btn-outline"
-        >
-          Add
-        </button>
-      </div>
     </div>
   );
 };

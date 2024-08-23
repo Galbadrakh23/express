@@ -65,8 +65,10 @@ app.delete("/users/:id", (req, res) => {
     return res.status(400).json({ message: "Not found user id" });
   }
   const deletedUser = employees.splice(findIndex, 1)[0];
+
   fs.writeFileSync("./users.json", JSON.stringify({ employees }));
-  res.status(200).json({ user: deletedUser });
+
+  res.status(200).json({ employees });
 });
 
 app.listen(8000, () => {
